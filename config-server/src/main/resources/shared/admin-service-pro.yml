@@ -1,0 +1,42 @@
+spring:
+  security:
+    user:
+      name: admin
+      password: 117881
+  mail:
+    host: smtp.163.com
+    username: lovecc0915@163.com
+    password: lovecc0915
+  boot:
+    admin:
+      notify:
+        mail:
+          from: lovecc0915@163.com
+          to: 1178819076@qq.com
+
+logging:
+  file: "logs/admin-service-pro.log"
+
+server:
+  port: 9998
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

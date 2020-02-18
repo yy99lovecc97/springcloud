@@ -1,0 +1,30 @@
+server:
+  port: 8766
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      cors:
+        #指定授权访问的域
+        allowed-origins: *
+        allowed-methods: *
+  endpoint:
+    health:
+      show-details: always
+turbine:
+  app-config: blog-service,user-service
+  combine-host-port: true
+  aggregator:
+    cluster-config: default
+  cluster-name-expression: new String("default")
+  instanceUrlSuffix:
+    default: actuator/hystrix.stream
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

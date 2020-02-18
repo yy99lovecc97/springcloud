@@ -1,0 +1,50 @@
+server:
+  port: 8763
+
+spring:
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  datasource:
+    url: jdbc:mysql://localhost/sysblog?serverTimezone=UTC&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: 117881
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    #消息确认
+    publisher-confirms: true
+    #虚拟主机
+    virtual-host: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+feign:
+  hystrix:
+    enabled: true
