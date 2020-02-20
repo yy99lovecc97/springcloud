@@ -11,7 +11,7 @@ spring:
     sampler:
       probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
   datasource:
-    url: jdbc:mysql://localhost/sysuser?serverTimezone=UTC&characterEncoding=utf8&characterSetResults=utf8
+    url: jdbc:mysql://localhost/sys-user?serverTimezone=UTC&characterEncoding=utf8&characterSetResults=utf8
     username: root
     password: 117881
     driver-class-name: com.mysql.cj.jdbc.Driver

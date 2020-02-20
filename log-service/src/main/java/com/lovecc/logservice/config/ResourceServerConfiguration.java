@@ -1,4 +1,4 @@
-package com.lovecc.blogservice.config;
+package com.lovecc.logservice.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +10,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
-@EnableResourceServer
 @Configuration
+@EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
     @Autowired
     TokenStore tokenStore;
@@ -19,7 +19,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         logger.info("Configuring ResourceServerSecurityConfigurer ");
-        resources.resourceId("blog-service").tokenStore(tokenStore);
+        resources.resourceId("log-service").tokenStore(tokenStore);
     }
 
     @Override

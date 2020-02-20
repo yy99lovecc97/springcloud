@@ -17,6 +17,8 @@
         <!--应为admin-server-->
         <module>admin-service</module>
         <module>uaa-service</module>
+        <module>zuul-service</module>
+        <module>log-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

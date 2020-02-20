@@ -1,0 +1,55 @@
+server:
+  port: 5000
+#ribbon.ReadTimeout， ribbon.SocketTimeout这两个是ribbon超时时间设置
+  #zuul.host.connect-timeout-millis， zuul.host.socket-timeout-millis这两个配置也是配超时的。
+  #区别在于，如果路由方式是serviceId的方式，那么ribbon的生效，如果是url的方式，则zuul.host开头的生效。（此处重要！使用serviceId路由和url路由是不一样的超时策略）
+  #如果你在zuul配置了熔断fallback的话，熔断超时也要配置，不然如果配置的ribbon超时时间大于熔断的超时，那么会先走熔断，相当于配的ribbon超时就不生效了。
+  #熔断超时是这样的：
+  #hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 20000
+zuul:
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+  routes:
+    user-service:
+      path: /userapi/**
+      serviceId: user-service
+      sensitiveHeaders:
+
+    blog-service:
+      path: /blogapi/**
+      serviceId: blog-service
+      #会过滤客户端附带的headers,一定要带上
+      sensitiveHeaders:
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+feign:
+  hystrix:
+    enabled: true
