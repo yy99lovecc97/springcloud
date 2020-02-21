@@ -1,5 +1,6 @@
 server:
   port: 8766
+
 management:
   endpoints:
     web:
@@ -12,8 +13,10 @@ management:
   endpoint:
     health:
       show-details: always
+
 turbine:
   app-config: blog-service,user-service
+  # 此配置默认为false，则服务是以host进行区分，若设置为true则以host+port进行区分
   combine-host-port: true
   aggregator:
     cluster-config: default

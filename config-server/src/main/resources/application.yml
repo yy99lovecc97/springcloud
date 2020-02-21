@@ -4,6 +4,7 @@ spring:
       server:
         native:
           search-locations: classpath:/shared
+      label: master
   profiles:
     active: native
   application:

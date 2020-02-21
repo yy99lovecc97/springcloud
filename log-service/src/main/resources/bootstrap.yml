@@ -1,9 +1,9 @@
 spring:
   application:
-    name: monitor-server
+    name: log-service
   cloud:
     config:
-      uri: http://localhost:8769
       fail-fast: true
+      uri: http://localhost:8769
   profiles:
     active: pro

@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -48,9 +46,9 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
         //// 开启/oauth/token_key验证端口无权限访问
         security.tokenKeyAccess("permitAll()")
                 // 开启/oauth/check_token验证端口认证权限访问
-                .checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients().passwordEncoder(new BCryptPasswordEncoder());
+                .checkTokenAccess("isAuthenticated()").allowFormAuthenticationForClients();
         /**
-         * 必须设置allowFormAuthenticationForClients 否则没有办法用postman获取token
+         * 必须设置allowFormAuthenticationForClients 否则没有办法用postman获取token 主要是让/oauth/token支持client_id以及client_secret作登录认证
          * 也需要指定密码加密方式BCryptPasswordEncoder
          */
     }
