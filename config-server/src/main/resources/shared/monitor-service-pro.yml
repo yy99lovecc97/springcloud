@@ -6,17 +6,17 @@ management:
     web:
       exposure:
         include: "*"
+        #跨域
       cors:
-        #指定授权访问的域
-        allowed-origins: *
-        allowed-methods: *
+        allowed-origins: "*"
+        allowed-methods: "*"
   endpoint:
     health:
       show-details: always
 
 turbine:
   app-config: blog-service,user-service
-  # 此配置默认为false，则服务是以host进行区分，若设置为true则以host+port进行区分
+  #此配置默认为false，则服务是以host进行区分，若设置为true则以host+port进行区分
   combine-host-port: true
   aggregator:
     cluster-config: default

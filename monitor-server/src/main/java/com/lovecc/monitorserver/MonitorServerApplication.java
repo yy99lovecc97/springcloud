@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableTurbine
-@RestController
 @EnableCircuitBreaker
 public class MonitorServerApplication {
 

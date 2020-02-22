@@ -27,6 +27,7 @@ public class UserController {
     @PostMapping("/registry")
     @SysLogger("registry")
     public User createUser(@RequestBody User user){
+        System.err.println(user.getPassword());
         String encoderPassword = BPwdEncoderUtils.BCryptPassword(user.getPassword());
         user.setPassword(encoderPassword);
         return userService.createUser(user);

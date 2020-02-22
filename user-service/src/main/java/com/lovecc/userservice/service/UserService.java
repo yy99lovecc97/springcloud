@@ -18,8 +18,8 @@ public class UserService {
     @Autowired
     UserDao userDao;
     @Autowired
-    @Qualifier(value = "authServiceHystrix")
     AuthServiceClient authServiceClient;
+
     public User createUser(User user){
         return userDao.save(user);
     }
@@ -31,7 +31,8 @@ public class UserService {
         if (user == null){
             throw new CommonException(ErrorCode.USER_NOT_FOUND);
         }
-        if (BPwdEncoderUtils.matches(password,user.getPassword())){
+        //差一个感叹号
+        if (!BPwdEncoderUtils.matches(password,user.getPassword())){
             throw new CommonException(ErrorCode.USER_PASSWORD_ERROR);
         }
         JWT jwt = authServiceClient.getToken("Basic dXNlci1zZXJ2aWNlOjExNzg4MQ==","password",username,password);

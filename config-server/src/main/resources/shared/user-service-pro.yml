@@ -29,7 +29,6 @@ spring:
     #虚拟主机
     virtual-host: /
 
-foo: lovecc
 
 management:
   endpoints:
@@ -50,3 +49,4 @@ eureka:
 feign:
   hystrix:
     enabled: true
+

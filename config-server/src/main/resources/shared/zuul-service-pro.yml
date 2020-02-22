@@ -14,13 +14,18 @@ zuul:
     user-service:
       path: /userapi/**
       serviceId: user-service
-      sensitiveHeaders:
+      sensitiveHeaders: Cookie,Set-Cookie
+      ignoredHeaders: Authorization
 
     blog-service:
       path: /blogapi/**
       serviceId: blog-service
       #会过滤客户端附带的headers,一定要带上
-      sensitiveHeaders:
+      sensitiveHeaders: Cookie,Set-Cookie
+      ignoredHeaders: Authorization
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
 
 hystrix:
   command:
@@ -28,11 +33,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 20000
-
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 20000
+            timeoutInMilliseconds: 80000
 
 management:
   endpoints:
@@ -50,6 +51,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-feign:
-  hystrix:
-    enabled: true
